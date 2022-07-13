@@ -4,10 +4,16 @@
     "public": "public",
     "ignore": [
       "firebase.json",
+      "index.html",
       "**/.*",
       "**/node_modules/**"
     ],
     "rewrites": [{
+      "source": "/new-post",
+      "run": {
+        "serviceId": "anonagram",
+        "region": "us-central1"
+      },
       "source": "**",
       "run": {
         "serviceId": "anonagram",

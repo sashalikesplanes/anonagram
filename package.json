@@ -10,7 +10,8 @@
 		"check": "svelte-check --tsconfig ./jsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./jsconfig.json --watch",
 		"lint": "prettier --check --plugin-search-dir=. .",
-		"format": "prettier --write --plugin-search-dir=. ."
+		"format": "prettier --write --plugin-search-dir=. .",
+		"deploy": "docker build -t gcr.io/anonagram-e0c6c/anonagram . && docker push gcr.io/anonagram-e0c6c/anonagram && firebase deploy --only hosting"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-node": "1.0.0-next.77",
@@ -28,6 +29,7 @@
 	"type": "module",
 	"dependencies": {
 		"daisyui": "^2.19.0",
-		"firebase": "^9.9.0"
+		"firebase": "^9.9.0",
+		"publitio_js_sdk": "^1.1.5"
 	}
 }
