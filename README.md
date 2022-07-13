@@ -1,8 +1,8 @@
 ## TODO
 - [ ] Form valiation
 - [ ] Post edit
-- [ ] Post delete
+- [X] Post delete
 - [ ] Upload progress tracker
 - [ ] Upload page formatting
 - [ ] Chat
-- [ ] 
+- [ ] Progressive enchancement of edit and delete forms
