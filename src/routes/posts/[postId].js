@@ -1,8 +1,8 @@
 import { db } from '$utils/firebase';
 import { doc, deleteDoc } from 'firebase/firestore';
-import PublitioAPI from 'publitio_js_sdk';
+import { publitioApi } from 'publitio_js_sdk';
 
-const publitio = new PublitioAPI(
+const publitio = publitioApi(
   import.meta.env.VITE_PUBLITIO_API_KEY,
   import.meta.env.VITE_PUBLITIO_API_SECRET
 );
