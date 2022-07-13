@@ -7,6 +7,9 @@ const config = {
 		alias: {
       $components: 'src/lib/components', 
       $utils: 'src/lib/utils',
+    },
+    methodOverride: {
+      allowed: ['PUT', 'PATCH', 'DELETE']
     }
 	}
 };

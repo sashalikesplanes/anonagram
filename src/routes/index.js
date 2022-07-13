@@ -12,8 +12,10 @@ export const get = async () => {
 			displayName: `@${data.displayName}`,
 			postBody: data.postBody,
 			fileUrl: data.fileUrl,
+			fileId: data.fileId,
 			isVideo: data.isVideo,
-			postedOn: data.postedOn.toDate().toString().slice(4, 21)
+			postedOn: data.postedOn.toDate().toString().slice(4, 21),
+			postId: doc.id
 		});
 
 		// Separate array to apply promise.all for speed

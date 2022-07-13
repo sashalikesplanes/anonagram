@@ -19,84 +19,83 @@
 			method: 'POST',
 			body: fileUploadForm
 		});
+
 		const resJSON = await res.json();
 		if (resJSON.code !== 201) {
 			uploading = false;
 			throw new Error(`Error uploading file: ${resJSON.message}`);
 		}
 		const fileUrl = resJSON.url_short;
+		const fileId = resJSON.id;
 		const fileType = resJSON.type;
 
-		// TODO refactor to be a JSON request
-		const postCreateForm = new FormData();
-		postCreateForm.append('fileUrl', fileUrl);
-		postCreateForm.append('displayName', displayName);
-		postCreateForm.append('postBody', postBody);
-		postCreateForm.append('fileType', fileType);
-		const resCreatePost = await fetch('/create-post', {
+		const resCreatePost = await fetch('/posts', {
 			method: 'POST',
-			body: postCreateForm
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				fileUrl,
+				displayName,
+				postBody,
+				fileType,
+				fileId
+			})
 		});
 		uploading = false;
 		goto('/');
 	}
 </script>
 
-{#if uploading}
-  <h1 class="text-4xl my-20 font-bold text-center">Uploading...</h1>
-{:else}
-	<form
-		class="card md:w-192 w-11/12 mx-auto my-3 bg-base-100 shadow-xl"
-		action="/create-post"
-		method="post"
-		enctype="multipart/form-data"
-		on:submit|preventDefault={handleSubmit}
-	>
-		<dl class="card-body">
-			<dt class="label"><label class="label-text" for="postFile" /></dt>
-			<!-- bind:this gets the reference to the HTML element-->
-			<dd>
-				<input
-					bind:files
-					id="postFile"
-					name="postFile"
-					class="input"
-					type="file"
-					accept=".png,.jpg,.mp4"
-				/>
-			</dd>
-
-			<dt class="label"><label class="label-text" for="displayName">Display Name:</label></dt>
-			<dd>
-				<input
-					type="text"
-					class="input input-bordered w-full"
-					id="displayName"
-					name="displayName"
-					placeholder="anon"
-					bind:value={displayName}
-				/>
-			</dd>
-			<dt class="label"><label class="label-text" for="postBody">Caption:</label></dt>
-			<dd>
-				<input
-					type="text"
-					class="textarea textarea-bordered h-24 w-full"
-					id="postBody"
-					name="postBody"
-					placeholder="Describe please..."
-					bind:value={postBody}
-				/>
-				<!--
-			<textarea
-				name="postBody"
-				id="postBody"
-				placeholder="Describe please..."
-				class="textarea textarea-bordered h-24 w-full"
+<form
+	class="card max-w-6xl w-11/12 mx-auto my-3 bg-base-100 shadow-xl"
+	action="/create-post"
+	method="post"
+	enctype="multipart/form-data"
+	on:submit|preventDefault={handleSubmit}
+>
+	<dl class="card-body pb-0">
+		<dt class="label"><label class="label-text" for="postFile" /></dt>
+		<!-- bind:this gets the reference to the HTML element-->
+		<dd>
+			<input
+				bind:files
+				id="postFile"
+				name="postFile"
+				class="input"
+				type="file"
+				accept=".png,.jpg,.mp4"
+				disabled={uploading}
 			/>
-      -->
-			</dd>
-		</dl>
-		<input class="btn" type="submit" />
-	</form>
-{/if}
+		</dd>
+
+		<dt class="label"><label class="label-text" for="displayName">Display Name:</label></dt>
+		<dd>
+			<input
+				type="text"
+				class="input input-bordered w-full"
+				id="displayName"
+				name="displayName"
+				placeholder="anon"
+				bind:value={displayName}
+				disabled={uploading}
+			/>
+		</dd>
+		<dt class="label"><label class="label-text" for="postBody">Caption:</label></dt>
+		<dd>
+			<input
+				type="text"
+				class="textarea textarea-bordered h-24 w-full"
+				id="postBody"
+				name="postBody"
+				placeholder="Describe please..."
+				bind:value={postBody}
+				disabled={uploading}
+			/>
+		</dd>
+		<button
+			class={`btn btn-block w-full mx-auto box-border my-3 text-2xl ${uploading ? 'loading' : ''}`}
+			type="submit"
+		>
+			{uploading ? 'Uploading...' : 'Submit'}
+		</button>
+	</dl>
+</form>
