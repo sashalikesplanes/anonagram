@@ -40,19 +40,20 @@
 				fileId
 			})
 		});
+		// TODO check if was succesfully created
 		uploading = false;
 		goto('/');
 	}
 </script>
 
 <form
-	class="card max-w-6xl w-11/12 mx-auto my-3 bg-base-100 shadow-xl"
 	action="/create-post"
 	method="post"
 	enctype="multipart/form-data"
 	on:submit|preventDefault={handleSubmit}
+	class="card w-11/12 max-w-3xl mx-auto my-3 bg-base-100 shadow-xl"
 >
-	<dl class="card-body pb-0">
+	<dl class="card-body relative pb-3">
 		<dt class="label"><label class="label-text" for="postFile" /></dt>
 		<!-- bind:this gets the reference to the HTML element-->
 		<dd>
