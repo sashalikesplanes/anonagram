@@ -23,8 +23,7 @@ export const del = async ({ request, params }) => {
 	}
 
 	return {
-		status: 302,
-		headers: { location: '/' }
+		status: 204,
 	};
 };
 
@@ -42,7 +41,6 @@ export const patch = async ({ request, params }) => {
 	}
 
 	return {
-    status: 302,
-    headers: { location: '/' }
+    status: 204,
   }
 };

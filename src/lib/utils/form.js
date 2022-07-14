@@ -23,8 +23,10 @@ export const enhance = (form, callback) => {
 
 
     if (callback) callback();
-    const url = new URL(invalidatePath);
-    await invalidate(url.href);
+    // No need to invalidate URL to cause a data refetch as that 
+    // is automatically handled by the onsnapshot in the in index.js
+    // const url = new URL(invalidatePath);
+    // await invalidate(url.href);
 
   }
 

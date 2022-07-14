@@ -15,7 +15,7 @@ export const post = async ({ request }) => {
 	}
 
 	return {
-		status: 302,
-		headers: { location: '/' }
+		status: 201,
+		// TODO add location
 	};
 };
