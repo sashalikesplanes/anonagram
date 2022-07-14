@@ -12,15 +12,17 @@
 			<Icon iconType="delete" />
 		</button>
 	</form>
-	<figure>
-		{#if isVideo}
-			<video autoplay class="w-full" src={fileUrl} alt="A video">
-				<track kind="captions" />
-			</video>
-		{:else}
-			<img src={fileUrl} alt="A user submition" />
-		{/if}
-	</figure>
+	<a href="/posts/{postId}">
+		<figure>
+			{#if isVideo}
+				<video autoplay class="w-full" src={fileUrl} alt="A video">
+					<track kind="captions" />
+				</video>
+			{:else}
+				<img src={fileUrl} alt="A user submition" />
+			{/if}
+		</figure>
+	</a>
 	<div class="card-body relative pb-3">
 		<h2 class="card-title">{displayName}</h2>
 		{#if !editing}
@@ -32,7 +34,11 @@
 			</button>
 			<p>{postBody}</p>
 		{:else}
-      <form action="/posts/{postId}?_method=PATCH" method="post" use:enhance="{() => editing = false}">
+			<form
+				action="/posts/{postId}?_method=PATCH"
+				method="post"
+				use:enhance={() => (editing = false)}
+			>
 				<textarea autofocus class="textarea textarea-bordered w-full" name="postBody" id="postBody"
 					>{postBody}</textarea
 				>

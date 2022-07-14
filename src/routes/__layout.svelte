@@ -6,7 +6,7 @@
 <header>
 	<h1 class="m-auto w-fit text-4xl font-bold mt-3">Anonagram</h1>
 	<div class="btn-group mx-auto w-fit mt-3">
-		<a sveltekit:prefetch class={`btn ${$page.url.pathname === '/' ? 'btn-active' : ''}`} href="/"
+		<a sveltekit:prefetch class={`btn ${$page.url.pathname === '/posts' ? 'btn-active' : ''}`} href="/posts"
 			>Feed</a
 		>
 		<a
@@ -16,8 +16,4 @@
 		>
 	</div>
 </header>
-{#if $navigating}
-  <h1 class="text-4xl">Loading</h1>
-{:else}
 <slot class="flex flex-col"/>
-{/if}

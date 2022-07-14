@@ -1,11 +1,26 @@
-import { db } from '$utils/firebase';
-import { doc, deleteDoc, updateDoc } from 'firebase/firestore';
+import { db, docToPost } from '$utils/firebase';
+import { doc, deleteDoc, documentId, query, getDoc, collection, where, updateDoc } from 'firebase/firestore';
 import { publitioApi } from 'publitio_js_sdk';
 
 const publitio = publitioApi(
 	import.meta.env.VITE_PUBLITIO_API_KEY,
 	import.meta.env.VITE_PUBLITIO_API_SECRET
 );
+
+export const get = async ({ params }) => {
+	const postId = params.postId;
+  const docRef = doc(db, 'posts', postId);
+  const docSnap = await getDoc(docRef);
+  if (!docSnap.exists()) {
+    throw new Error(`Document not found in firestore`);
+  }
+  
+  const post = await docToPost(docSnap);
+  return {
+    status: 200,
+    body: { post }
+  }
+};
 
 export const del = async ({ request, params }) => {
 	const postId = params.postId;
@@ -23,7 +38,7 @@ export const del = async ({ request, params }) => {
 	}
 
 	return {
-		status: 204,
+		status: 204
 	};
 };
 
@@ -41,6 +56,6 @@ export const patch = async ({ request, params }) => {
 	}
 
 	return {
-    status: 204,
-  }
+		status: 204
+	};
 };
