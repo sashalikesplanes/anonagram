@@ -3,10 +3,10 @@ import { page } from '$app/stores';
 
 export const enhance = (form, callback) => {
   // TODO Add stuff to refill the form 
-	let invalidatePath;
 
 	// make sure that invalidatePath is updated whenever the page changes
-	page.subscribe((path) => (invalidatePath = path.url));
+	// let invalidatePath = $page.url;
+	// page.subscribe((path) => (invalidatePath = path.url));
 
 	async function handleSubmit(event) {
     event.preventDefault();
