@@ -61,18 +61,20 @@
 				bind:files
 				id="postFile"
 				name="postFile"
-				class="input"
+				class="input text-base w-full"
 				type="file"
 				accept=".png,.jpg,.mp4"
 				disabled={uploading}
 			/>
 		</dd>
 
-		<dt class="label"><label class="label-text" for="displayName">Display Name:</label></dt>
+		<dt class="label">
+			<label class="label-text text-base" for="displayName">Display Name:</label>
+		</dt>
 		<dd>
 			<input
 				type="text"
-				class="input input-bordered w-full"
+				class="input input-bordered w-full text-base"
 				id="displayName"
 				name="displayName"
 				placeholder="anon"
@@ -80,17 +82,16 @@
 				disabled={uploading}
 			/>
 		</dd>
-		<dt class="label"><label class="label-text" for="postBody">Caption:</label></dt>
+		<dt class="label"><label class="label-text text-base" for="postBody">Caption:</label></dt>
 		<dd>
-			<input
-				type="text"
-				class="textarea textarea-bordered h-24 w-full"
-				id="postBody"
+			<textarea
+				class="textarea text-base textarea-bordered h-24 w-full"
 				name="postBody"
-				placeholder="Describe please..."
+				id="postBody"
 				bind:value={postBody}
-				disabled={uploading}
-			/>
+        disabled={uploading}
+				placeholder="Describe please..."></textarea
+			>
 		</dd>
 		<button
 			class={`btn btn-block w-full mx-auto box-border my-3 text-2xl ${uploading ? 'loading' : ''}`}
