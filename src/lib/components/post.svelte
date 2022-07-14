@@ -2,10 +2,11 @@
 	export let displayName, postBody, fileUrl, postedOn, isVideo, postId, fileId;
 	let editing = false;
 	import Icon from '$components/icon.svelte';
+	import { enhance } from '$lib/utils/form';
 </script>
 
 <li class="card w-11/12 max-w-3xl mx-auto my-3 bg-base-100 shadow-xl">
-	<form class="" action="/posts/{postId}?_method=DELETE" method="post">
+	<form class="" action="/posts/{postId}?_method=DELETE" method="post" use:enhance>
 		<input type="hidden" id="fileId" name="fileId" value={fileId} />
 		<button class="btn z-10 btn-circle absolute ml-auto right-3 top-3" type="submit">
 			<Icon iconType="delete" />
@@ -31,11 +32,10 @@
 			</button>
 			<p>{postBody}</p>
 		{:else}
-			<form action="/posts/{postId}?_method=PATCH" method="post">
+      <form action="/posts/{postId}?_method=PATCH" method="post" use:enhance="{() => editing = false}">
 				<textarea autofocus class="textarea textarea-bordered w-full" name="postBody" id="postBody"
 					>{postBody}</textarea
 				>
-				<!-- on:click={() => (editing = !editing)} -->
 				<button class="btn mt-3 block mx-auto" type="submit">Submit</button>
 			</form>
 		{/if}

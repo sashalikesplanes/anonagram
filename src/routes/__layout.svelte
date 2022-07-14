@@ -1,6 +1,6 @@
 <script>
 	import '$lib/global.css';
-	import { page } from '$app/stores';
+	import { page, navigating } from '$app/stores';
 </script>
 
 <header>
@@ -16,4 +16,8 @@
 		>
 	</div>
 </header>
+{#if $navigating}
+  <h1 class="text-4xl">Loading</h1>
+{:else}
 <slot class="flex flex-col"/>
+{/if}
