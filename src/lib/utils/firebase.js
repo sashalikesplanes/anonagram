@@ -18,7 +18,6 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
 
-
 // ***************************************************************************
 // Utility functions for working with firebase
 
@@ -26,13 +25,15 @@ export const storage = getStorage(app);
 // into a format for posts
 export const docToPost = (doc) => {
 	const data = doc.data();
-	return {
-		displayName: `@${data.displayName}`,
-		postBody: data.postBody,
-		fileUrl: data.fileUrl,
-		fileId: data.fileId,
-		isVideo: data.isVideo,
-		postedOn: data.postedOn.toDate().toString().slice(4, 21),
-		postId: doc.id
-	};
+	return [
+		doc.id,
+		{
+			displayName: `@${data.displayName}`,
+			postBody: data.postBody,
+			fileUrl: data.fileUrl,
+			fileId: data.fileId,
+			isVideo: data.isVideo,
+			postedOn: data.postedOn.toDate().toString().slice(4, 21)
+		}
+	];
 };
