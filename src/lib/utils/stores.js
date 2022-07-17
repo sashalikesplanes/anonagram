@@ -18,7 +18,6 @@ function createPosts() {
           posts.set(...docToPost(doc));
         });
         set(posts);
-        console.log(posts);
 			});
 		}
 

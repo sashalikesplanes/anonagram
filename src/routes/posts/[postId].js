@@ -7,20 +7,20 @@ const publitio = publitioApi(
 	import.meta.env.VITE_PUBLITIO_API_SECRET
 );
 
-export const get = async ({ params }) => {
-	const postId = params.postId;
-  const docRef = doc(db, 'posts', postId);
-  const docSnap = await getDoc(docRef);
-  if (!docSnap.exists()) {
-    throw new Error(`Document not found in firestore`);
-  }
-  
-  const post = await docToPost(docSnap);
-  return {
-    status: 200,
-    body: { post }
-  }
-};
+// export const get = async ({ params }) => {
+	// const postId = params.postId;
+  // const docRef = doc(db, 'posts', postId);
+  // const docSnap = await getDoc(docRef);
+  // if (!docSnap.exists()) {
+    // throw new Error(`Document not found in firestore`);
+  // }
+  // 
+  // const post = await docToPost(docSnap);
+  // return {
+    // status: 200,
+    // body: { post }
+  // }
+// };
 
 export const del = async ({ request, params }) => {
 	const postId = params.postId;

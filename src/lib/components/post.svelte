@@ -1,8 +1,9 @@
 <script>
-	export let displayName, postBody, fileUrl, postedOn, isVideo, postId, fileId;
-	let editing = false;
 	import Icon from '$components/icon.svelte';
 	import { enhance } from '$lib/utils/form';
+
+	export let displayName, postBody, fileUrl, postedOn, isVideo, postId, fileId;
+	let editing = false;
 </script>
 
 <li class="card w-11/12 max-w-3xl mx-auto my-3 bg-base-100 shadow-xl">
