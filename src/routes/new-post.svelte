@@ -1,5 +1,6 @@
 <script>
 	import { goto } from '$app/navigation';
+	import Transition from '$lib/components/transition.svelte';
 	// let postFile;
 	let displayName;
 	let postBody;
@@ -46,58 +47,62 @@
 	}
 </script>
 
-<form
-	action="/create-post"
-	method="post"
-	enctype="multipart/form-data"
-	on:submit|preventDefault={handleSubmit}
-	class="card w-11/12 max-w-3xl mx-auto my-3 bg-base-100 shadow-xl"
->
-	<dl class="card-body relative pb-3">
-		<dt class="label"><label class="label-text" for="postFile" /></dt>
-		<!-- bind:this gets the reference to the HTML element-->
-		<dd>
-			<input
-				bind:files
-				id="postFile"
-				name="postFile"
-				class="input text-base w-full"
-				type="file"
-				accept=".png,.jpg,.mp4"
-				disabled={uploading}
-			/>
-		</dd>
+<Transition>
+	<form
+		action="/create-post"
+		method="post"
+		enctype="multipart/form-data"
+		on:submit|preventDefault={handleSubmit}
+		class="card w-11/12 max-w-3xl mx-auto my-3 bg-base-100 shadow-xl"
+	>
+		<dl class="card-body relative pb-3">
+			<dt class="label"><label class="label-text" for="postFile" /></dt>
+			<!-- bind:this gets the reference to the HTML element-->
+			<dd>
+				<input
+					bind:files
+					id="postFile"
+					name="postFile"
+					class="input text-base w-full"
+					type="file"
+					accept=".png,.jpg,.mp4"
+					disabled={uploading}
+				/>
+			</dd>
 
-		<dt class="label">
-			<label class="label-text text-base" for="displayName">Display Name:</label>
-		</dt>
-		<dd>
-			<input
-				type="text"
-				class="input input-bordered w-full text-base"
-				id="displayName"
-				name="displayName"
-				placeholder="anon"
-				bind:value={displayName}
-				disabled={uploading}
-			/>
-		</dd>
-		<dt class="label"><label class="label-text text-base" for="postBody">Caption:</label></dt>
-		<dd>
-			<textarea
-				class="textarea text-base textarea-bordered h-24 w-full"
-				name="postBody"
-				id="postBody"
-				bind:value={postBody}
-        disabled={uploading}
-				placeholder="Describe please..."></textarea
+			<dt class="label">
+				<label class="label-text text-base" for="displayName">Display Name:</label>
+			</dt>
+			<dd>
+				<input
+					type="text"
+					class="input input-bordered w-full text-base"
+					id="displayName"
+					name="displayName"
+					placeholder="anon"
+					bind:value={displayName}
+					disabled={uploading}
+				/>
+			</dd>
+			<dt class="label"><label class="label-text text-base" for="postBody">Caption:</label></dt>
+			<dd>
+				<textarea
+					class="textarea text-base textarea-bordered h-24 w-full"
+					name="postBody"
+					id="postBody"
+					bind:value={postBody}
+					disabled={uploading}
+					placeholder="Describe please..."
+				/>
+			</dd>
+			<button
+				class={`btn btn-block w-full mx-auto box-border my-3 text-2xl ${
+					uploading ? 'loading' : ''
+				}`}
+				type="submit"
 			>
-		</dd>
-		<button
-			class={`btn btn-block w-full mx-auto box-border my-3 text-2xl ${uploading ? 'loading' : ''}`}
-			type="submit"
-		>
-			{uploading ? 'Uploading...' : 'Submit'}
-		</button>
-	</dl>
-</form>
+				{uploading ? 'Uploading...' : 'Submit'}
+			</button>
+		</dl>
+	</form>
+</Transition>
