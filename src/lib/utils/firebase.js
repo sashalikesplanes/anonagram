@@ -37,3 +37,15 @@ export const docToPost = (doc) => {
 		}
 	];
 };
+
+export const docToMessage = (doc) => {
+	const data = doc.data();
+	return [
+		doc.id,
+		{
+			displayName: `@${data.displayName}`,
+			messageText: data.messageText,
+			postedOn: data.postedOn.toDate().toString().slice(4, 21)
+		}
+	];
+};
