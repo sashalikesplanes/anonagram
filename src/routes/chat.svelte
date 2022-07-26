@@ -43,7 +43,6 @@
 		if (isOutOfMessages) return;
 
 		if (messagesList.scrollTop < LOAD_MORE_THRESHOLD && !isOutOfMessages && !isLoadingMore) {
-		  console.log('loading more')
 			isLoadingMore = true;
 			await loadMoreMessages();
 			isLoadingMore = false;
@@ -84,12 +83,12 @@
 		});
 		message = '';
 		isSending = false;
-		if (response.ok) throw new Error('Failed to send message');
+		if (!response.ok) throw new Error('Failed to send message');
 	}
 </script>
 
-<div class="h-screen overflow-hidden flex flex-col p-3">
-	<h1 class="mb-3 text-bold text-4xl text-center">Anonchat</h1>
+<div class="h-full overflow-hidden flex flex-col w-11/12 mx-auto">
+	<!-- <h1 class="mb-3 text-bold text-4xl text-center">Anonchat</h1> -->
 	{#if visible}
 		<ul
 			in:fly={{ x: 1000, duration: 400 }}

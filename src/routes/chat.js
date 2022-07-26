@@ -1,6 +1,6 @@
 import { supabase } from '$lib/db';
 
-export const GET = async ({ url }) => {
+export const get = async ({ url }) => {
 	const MESSAGES_PER_PAGE = 10;
 	const page = Number(url.searchParams.get('page')) || 0;
 	const { data: messages, error } = await supabase
@@ -21,7 +21,7 @@ export const GET = async ({ url }) => {
 	};
 };
 
-export const POST = async ({ request }) => {
+export const post = async ({ request }) => {
 	const form = await request.formData();
 	const message = form.get('message');
 	const username = form.get('username');
