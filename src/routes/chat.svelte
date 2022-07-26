@@ -87,7 +87,7 @@
 	}
 </script>
 
-<div class="h-full overflow-hidden flex flex-col w-11/12 mx-auto">
+<div class="h-full overflow-hidden flex flex-col w-11/12 mx-auto pb-3">
 	<!-- <h1 class="mb-3 text-bold text-4xl text-center">Anonchat</h1> -->
 	{#if visible}
 		<ul

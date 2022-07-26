@@ -10,7 +10,7 @@
 		? 'ml-auto bg-secondary rounded-br-none text-secondary-content'
 		: 'mr-auto bg-neutral rounded-bl-none text-neutral-content'}"
 >
-	<p class="text-accent-content ">@{message.username}</p>
+	<p class="text-accent">@{message.username}</p>
     
   <p >{message.message}</p>
 	<p class="text-right h-auto">
