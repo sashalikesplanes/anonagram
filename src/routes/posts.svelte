@@ -5,12 +5,10 @@
 </script>
 
 <Transition>
-	{#if [...$posts].length > 0}
-		<ul>
-			{#each [...$posts] as [postId, post] (postId)}
-				<Post {postId} {...post} />
-			{/each}
-		</ul>
+	{#if $posts}
+		{#each [...$posts] as [postId, post] (postId)}
+			<Post {postId} {...post} />
+		{/each}
 	{:else}
 		<h1 class="text-center my-[100px] text-4xl">Loading...</h1>
 	{/if}
