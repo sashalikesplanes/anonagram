@@ -10,6 +10,7 @@
 
 	let bottomMessage;
 	let message;
+
 	let isSending = false;
 	let visible = false;
 
@@ -17,8 +18,8 @@
 	let isOutOfMessages = false;
 	let isLoadingMore = false;
 	const LOAD_MORE_THRESHOLD = 200;
-	let messagesList;
 
+	let messagesList;
 	export let messages;
 
 	onMount(async () => {
@@ -50,10 +51,13 @@
 	}
 
 	async function loadMoreMessages() {
-		const response = await fetch('/chat?' + new URLSearchParams({ page: String(nextMessagePage) }), {
-			method: 'get',
-			headers: { accept: 'application/json' }
-		});
+		const response = await fetch(
+			'/chat?' + new URLSearchParams({ page: String(nextMessagePage) }),
+			{
+				method: 'get',
+				headers: { accept: 'application/json' }
+			}
+		);
 		const moreMessages = (await response.json()).messages;
 
 		if (moreMessages.length === 0) isOutOfMessages = true;
@@ -110,7 +114,7 @@
 			<textarea
 				name="message"
 				id="message"
-				class="textarea flex-1 textarea-primary h-16 overflow-scroll"
+				class="textarea text-base flex-1 textarea-primary h-16 overflow-scroll"
 				placeholder="type here..."
 				bind:value={message}
 			/>

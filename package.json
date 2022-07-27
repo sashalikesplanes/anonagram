@@ -14,6 +14,7 @@
 		"deploy": "docker build -t gcr.io/anonagram-e0c6c/anonagram . && docker push gcr.io/anonagram-e0c6c/anonagram && firebase deploy --only hosting"
 	},
 	"devDependencies": {
+		"@rvxlab/tailwind-plugin-ios-full-height": "^1.1.0",
 		"@sveltejs/adapter-node": "1.0.0-next.77",
 		"@sveltejs/kit": "next",
 		"autoprefixer": "^10.4.7",
@@ -28,9 +29,9 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@supabase/supabase-js": "^1.35.4",
 		"daisyui": "^2.19.0",
 		"firebase": "^9.9.0",
-		"publitio_js_sdk": "^1.1.5",
-		"@supabase/supabase-js": "^1.35.4"
+		"publitio_js_sdk": "^1.1.5"
 	}
 }
