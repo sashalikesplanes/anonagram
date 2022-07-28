@@ -3,7 +3,7 @@ import supabase from '$lib/db';
 
 // TODO make a proper store
 export const user = readable({ uuid: 'ddeec5b0-ac24-4451-a0e1-93471e3b9fc4', username: 'sasha' });
-export const messages = await createMessages();
+// export const messages = await createMessages();
 
 async function createMessages() {
   // create a store that can load previous messages on demand, and is subscribed to new messages
@@ -13,8 +13,8 @@ async function createMessages() {
   let messages = []; // latest messages first 
   let currentMessagePage = 0;
   // read initial batch of messages
-  const { subscribe, set } = writable(null, set => {
-    loadMoreMessages();
+  const { subscribe, set } = writable(null, async set => {
+    await loadMoreMessages();
     // create a subscription which updates messages
     // return unsubscribe
     const subscription = supabase
