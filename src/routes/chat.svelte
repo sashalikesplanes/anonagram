@@ -1,32 +1,29 @@
 <script lang="ts">
-	import HeaderMainFooter from '$lib/components/header-main-footer.svelte';
+	import { onMount } from 'svelte';
+
 	import Messages from '$lib/components/messages.svelte';
 	import SendMessage from '$lib/components/send-message.svelte';
 
 	import { QueryClientProvider, QueryClient } from '@sveltestack/svelte-query';
-	import { onMount } from 'svelte';
+
 	const client = new QueryClient();
 
-	let visible = false;
+	let visible = false; // for animations to play
+	let scrollContainer: HTMLElement; // enable Messages to control scroll
 
-	onMount(() => {
-		visible = true;
-	});
+	onMount(() => (visible = true));
 </script>
 
-<HeaderMainFooter>
-	<QueryClientProvider slot="main" let:scrollContainer {client}>
+<main bind:this={scrollContainer} class="flex-1 overflow-y-auto">
+	<QueryClientProvider {client}>
 		{#if visible}
-			<Messages {scrollContainer}/>
+			<Messages {client} {scrollContainer} />
 		{/if}
 	</QueryClientProvider>
+</main>
 
-	<svelte:fragment slot="footer">
-		{#if visible}
-			<SendMessage />
-		{/if}
-	</svelte:fragment>
-</HeaderMainFooter>
-
-<!-- {#if visible}
-{/if} -->
+<footer>
+	{#if visible}
+		<SendMessage />
+	{/if}
+</footer>
