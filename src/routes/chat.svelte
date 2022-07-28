@@ -1,10 +1,32 @@
 <script lang="ts">
-  import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
-  import Messages from '$lib/components/messages.svelte';
+	import HeaderMainFooter from '$lib/components/header-main-footer.svelte';
+	import Messages from '$lib/components/messages.svelte';
+	import SendMessage from '$lib/components/send-message.svelte';
 
-  const client = new QueryClient();
+	import { QueryClientProvider, QueryClient } from '@sveltestack/svelte-query';
+	import { onMount } from 'svelte';
+	const client = new QueryClient();
+
+	let visible = false;
+
+	onMount(() => {
+		visible = true;
+	});
 </script>
 
-<QueryClientProvider {client}>
-  <Messages />
-</QueryClientProvider>
+<HeaderMainFooter>
+	<QueryClientProvider slot="main" let:scrollContainer {client}>
+		{#if visible}
+			<Messages {scrollContainer}/>
+		{/if}
+	</QueryClientProvider>
+
+	<svelte:fragment slot="footer">
+		{#if visible}
+			<SendMessage />
+		{/if}
+	</svelte:fragment>
+</HeaderMainFooter>
+
+<!-- {#if visible}
+{/if} -->

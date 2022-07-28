@@ -41,6 +41,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@formkit/auto-animate": "^1.0.0-beta.1",
 		"@sveltestack/svelte-query": "^1.6.0",
 		"broadcast-channel": "^4.14.0"
 	}
